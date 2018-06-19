@@ -1,8 +1,8 @@
+require 'pg'
 class Peep
   def self.all
-    [
-      'capybara feature test',
-      'setting up database'
-    ]
+    connection = PG.connect(dbname: 'chitter1')
+    result = connection.exec('SELECT * FROM peeps')
+    result.map { |peep| peep['message'] }
   end
 end
