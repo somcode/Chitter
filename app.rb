@@ -2,11 +2,11 @@ require 'sinatra/base'
 
 class Chitter < Sinatra::Base
   get '/' do
-    peeps = [
+    @peeps = [
       "capybara feature test",
       "setting up database"
     ]
-    peeps.join
+    erb(:index)
   end
 
   run! if app_file == $0
