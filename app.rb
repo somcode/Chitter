@@ -12,13 +12,7 @@ class Chitter < Sinatra::Base
   end
 
   post '/' do
-    mes = params['message']
-    if ENV['ENVIRONMENT'] == 'test'
-      connection = PG.connect(dbname: 'chitter1_test')
-    else
-      connection = PG.connect(dbname: 'chitter1')
-    end
-    connection.exec("INSERT INTO peeps (message) VALUES('#{mes}')")
+    Peep.create(mes: params['message'])
     redirect '/'
   end
 
